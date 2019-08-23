@@ -1,0 +1,148 @@
+﻿@model Product
+@{
+    ViewBag.Title = "Edit";
+}
+<header>
+    @Scripts.Render("~/Content/javascript/jquery.min.js")
+</header>
+
+
+<section class="flat-row flat-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section margin_bottom_17">
+                    <h2 class="title">
+                        Edit Product
+                    </h2>
+                </div><!-- /.title-section -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="wrap-contact style2">
+                <form novalidate="" class="contact-form" id="editProduct" method="post">
+                    <div class="form-text-wrap clearfix">
+                        <div class="row"><input type="hidden" name="ID" value="@Model.ID" /></div>
+                        <div class="row">
+                            <div class="contact-name">
+                                <label>Category</label>
+                                <select name="CategoryId" aria-required="true" class="form-control form-control-lg">
+                                    @{ int i;}
+                                    @foreach (var categoryList in ViewBag.CategoryList)
+                                    {
+                                        if (Model.CategoryId == categoryList.ID)
+                                        {
+                                            <option value="@categoryList.ID" selected="selected">@categoryList.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@categoryList.ID">@categoryList.Name</option>
+                                        }
+                                    }
+                                </select>
+
+                            </div>
+
+                            <div class="contact-name">
+                                <label>Brand</label>
+                                <select name="BrandId" aria-required="true" class="form-control form-control-lg">
+                                    @foreach (var brandList in ViewBag.BrandList)
+                                    {
+                                        if (Model.BrandId == brandList.ID)
+                                        {
+                                            <option value="@brandList.ID" selected="selected">@brandList.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@brandList.ID">@brandList.Name</option>
+                                        }
+                                    }
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="contact-name">
+                                <label></label>
+                                <input type="text" placeholder="Name" size="30" name="Name" aria-required="true" value="@Model.Name">
+                            </div>
+                            <div class="contact-name">
+                                <label></label>
+                                <input type="text" placeholder="Description" size="30" name="Description" aria-required="true" value="@Model.Description">
+                            </div>
+                            <div class="contact-name">
+                                <label></label>
+                                <input type="text" placeholder="Price" size="30" name="Price" aria-required="true" value="@Model.Price">
+                            </div>
+                        </div>
+                        <div class="contact-subject">
+                        </div>
+                    </div>
+                    <div class="contact-message clearfix">
+                        <label>Image</label>
+                        <input type="file" size="30" name="Image" aria-required="true" id="ImageUpload" accept=".jpg, .png">
+                        <input type="hidden" name="RowAddDate" value="@Model.RowAddDate" />
+                        <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL"/>
+                        <img id="ProductImage" />
+                    </div>
+                    <div class="form-submit">
+                        <button type="button" class="contact-submit" id="btnEdit">Update</button>
+                    </div>
+                </form>
+            </div><!-- /.wrap-contact -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.flat-row -->
+
+
+
+<script>
+    $("#btnEdit").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/Product/Edit',
+            data: $("#editProduct").serialize()
+        })
+            .done(function (data) {
+                $("#SearchProduct").html(data);
+                $("#ActionContainer").html("");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('Failed');
+            });
+    });
+</script>
+
+<script>
+    $("#ImageUpload").change(function () {
+        var element = this;
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+        for (i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: '/Shared/UploadImage',
+            //dataType:'json',
+            data: formData,
+            contentType: false,
+            processData: false
+        })
+            .done(function (response) {
+                console.log(response);
+                if (response) {
+                    $("#ProductImage").attr("src", response.ImageURL);
+                    $("#ImageURL").val(response.ImageURL);
+                }
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                //debugger;
+                alert('Failed');
+            });
+
+    });
+</script>

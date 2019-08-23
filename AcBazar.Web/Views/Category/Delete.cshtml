@@ -1,0 +1,25 @@
+﻿@model AcBazar.Entities.Category
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Category</h2>
+
+<h3>Are you sure to delete?</h3>
+
+<form method="post">
+    <input name="ID" value="@Model.ID" type="hidden" />
+    <br />
+
+    <label>Name</label>
+    <input name="Name" value="@Model.Name" />
+    <br />
+
+    <label>Description</label>
+    <input name="Description" value="@Model.Description" />
+    <br />
+
+    <input name="RowAddDate" value="@Model.RowAddDate" type="hidden" />
+    <br />
+    <button type="submit">Delete</button>
+</form>

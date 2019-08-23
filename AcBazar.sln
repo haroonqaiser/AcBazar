@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcBazar.Entities", "AcBazar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcBazar.Database", "AcBazar.Database\AcBazar.Database.csproj", "{9A2F5C1A-1749-4D1B-A386-A1134AF08399}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcBazar.Services", "AcBazar.Services\AcBazar.Services.csproj", "{051B2779-ACE0-4641-AA60-A9B989643FC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9A2F5C1A-1749-4D1B-A386-A1134AF08399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A2F5C1A-1749-4D1B-A386-A1134AF08399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A2F5C1A-1749-4D1B-A386-A1134AF08399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051B2779-ACE0-4641-AA60-A9B989643FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051B2779-ACE0-4641-AA60-A9B989643FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051B2779-ACE0-4641-AA60-A9B989643FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051B2779-ACE0-4641-AA60-A9B989643FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -49,13 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ACContext.cs" />
-    <Compile Include="Migrations\201908061532262_initialized.cs" />
-    <Compile Include="Migrations\201908061532262_initialized.Designer.cs">
-      <DependentUpon>201908061532262_initialized.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201908061733006_Inatilization_2.cs" />
-    <Compile Include="Migrations\201908061733006_Inatilization_2.Designer.cs">
-      <DependentUpon>201908061733006_Inatilization_2.cs</DependentUpon>
+    <Compile Include="Migrations\201908192143170_initalization.cs" />
+    <Compile Include="Migrations\201908192143170_initalization.Designer.cs">
+      <DependentUpon>201908192143170_initalization.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,11 +67,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908061532262_initialized.resx">
-      <DependentUpon>201908061532262_initialized.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908061733006_Inatilization_2.resx">
-      <DependentUpon>201908061733006_Inatilization_2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201908192143170_initalization.resx">
+      <DependentUpon>201908192143170_initalization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

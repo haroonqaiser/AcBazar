@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<section class="flat-row mail-chimp">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text">
+                    @*<h3>Product Search</h3>*@
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="subscribe clearfix">
+                    <form action="#" method="post" accept-charset="utf-8" id="subscribe-form">
+                        <div class="subscribe-content">
+                                <div class="input">
+                                    <input type="email" id="txtSearch" name="Search" placeholder="Search Product">
+                                </div>
+
+                                <div class="button">
+                                    <button type="button" id="btnSearch">SEARCH</button>
+                                </div>
+                                
+                        </div>
+                    </form>
+                    <div class="button">
+                        <label>  </label>
+                        <input type="button" id="btnNew" value="ADD NEW" />
+                    </div>
+                </div><!-- /.subscribe -->
+            </div>
+        </div>
+    </div>
+</section>
+
+@{
+
+    Html.RenderAction("ProductInfo");
+    //Html.RenderAction("Create");
+}
+
+<div id="ActionContainer"></div>
+<script>
+    $("#btnSearch").click(function () {
+        var searchValue = $("#txtSearch").val();
+
+        $.ajax({
+            type: "GET",
+            url: '/Product/ProductInfo',
+            data: {
+                dataSearch: searchValue
+            }
+        })
+            .done(function (data) {
+                $("#SearchProduct").html(data);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('Failed');
+            });
+
+    });
+
+</script>
+
+<script>
+    $("#btnNew").click(function () {
+        //var tsearch = $("#txtSearch").val();
+        $.ajax({
+            type: "GET",
+            url: '/Product/Create',
+        })
+            .done(function (data) {
+                $("#ActionContainer").html(data);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('Failed');
+            });
+
+    });</script>
+

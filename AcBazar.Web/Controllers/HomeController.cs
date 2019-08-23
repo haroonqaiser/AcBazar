@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AcBazar.Services;
+using AcBazar.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,16 @@ namespace AcBazar.Web.Controllers
 {
     public class HomeController : Controller
     {
+        CategoriesService categoriesService = new CategoriesService();
+        ProductsService productsService = new ProductsService();
         public ActionResult Index()
         {
-            return View();
+            HomeViewModels model = new HomeViewModels
+            {
+                Categories = categoriesService.GetCategories(),
+                Products = productsService.GetProducts()
+            };
+            return View(model);
         }
 
         public ActionResult About()
@@ -27,4 +36,6 @@ namespace AcBazar.Web.Controllers
             return View();
         }
     }
+
+
 }

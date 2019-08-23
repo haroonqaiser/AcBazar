@@ -8,6 +8,7 @@ namespace AcBazar.Entities
 {
     public class Category:BaseEntity
     {
-               public List<Product> Products { get; set; }
+        public string ImageURL { get; set; }
+        public List<Product> Products { get; set; }
     }
 }
