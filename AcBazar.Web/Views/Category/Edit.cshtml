@@ -1,39 +1,69 @@
 ﻿@model AcBazar.Entities.Category
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Category";
 }
 
-<h2>Edit Category</h2>
+<header>
+    @Scripts.Render("~/Content/javascript/jquery.min.js")
+</header>
+<section class="flat-row flat-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section margin_bottom_17">
+                    <h2 class="title">
+                        Edit Product
+                    </h2>
+                </div><!-- /.title-section -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="wrap-contact style2">
 
-<form method="post">
-    <input name="ID" value="@Model.ID" type="hidden" />
-    <br />
+                <form novalidate="" class="contact-form" method="post" id="editRecord">
+                    <div class="form-text-wrap clearfix">
+                        <div class="row">
+                            <input name="ID" value="@Model.ID" type="hidden" />
+                            <input name="RowAddDate" value="@Model.RowAddDate" type="hidden" />
+                            <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL" />
 
-    <label>Name</label>
-    <input name="Name" value="@Model.Name" />
-    <br />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
 
-    <label>Description</label>
-    <input name="Description" value="@Model.Description" />
-    <br />
+                                <label>Name</label>
+                                <input name="Name" value="@Model.Name" />
+                                <br />
+
+                                <label>Description</label>
+                                <input name="Description" value="@Model.Description" />
+                                <br />
 
 
-    <label>Image:</label>
-    <input name="Image" type="file" id="ImageUpload" accept=".jpg, .png" />
-    <br />
+                                <label>Image:</label>
+                                <input name="Image" type="file" id="ImageUpload" accept=".jpg, .png" />
+                                <br />
+                            </div>
 
-    <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL"/>
-    <br />
-
-    <img id="CategoryImage" src="@Model.ImageURL" />
-    <br />
-
-    <input name="RowAddDate" value="@Model.RowAddDate" type="hidden" />
-    <br />
-
-    <button type="submit">Save</button>
-</form>
-
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <img id="CategoryImage" src="@Model.ImageURL" />
+                                <br />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <input name="RowAddDate" value="@Model.RowAddDate" type="hidden" />
+                                <button type="button" id="btnEdit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 <script>
     $("#ImageUpload").change(function () {
         var element = this;
@@ -51,7 +81,7 @@
             //dataType:'json',
             data: formData,
             contentType: false,
-            processData:false
+            processData: false
         })
             .done(function (response) {
                 console.log(response);
@@ -65,5 +95,22 @@
                 alert('Failed');
             });
 
+    });
+</script>
+
+<script>
+    $("#btnEdit").click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/Category/Edit',
+            data: $("#editRecord").serialize()
+        })
+            .done(function (data) {
+                $("#SearchProduct").html(data);
+                $("#ActionContainer").html("");
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert('Failed');
+            });
     });
 </script>

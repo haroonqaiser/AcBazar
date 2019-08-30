@@ -71,11 +71,18 @@
                 })
                     .done(function (data) {
                         $("#ActionContainer").html(data);
+                        focusaction();
                     })
                     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                         alert('Failed');
                     });
             });
+
+            function focusaction() {
+                $('html, body').animate({
+                    scrollTop: $("#ActionContainer").offset().top - 100
+                }, 1000);
+            }
         </script>
 
         <script>
@@ -99,5 +106,10 @@
                         });
                 }
             });
+
+          
+
         </script>
+
+    
     </div>

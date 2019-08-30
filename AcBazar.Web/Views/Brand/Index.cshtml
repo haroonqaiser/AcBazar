@@ -20,38 +20,6 @@
     </div><!-- /.container -->
 </div><!-- /.page-title -->
 
-<div class="container">
-    @{int i = 0; }
-    @foreach (var item in Model)
-    {
-        if (i == 0)
-        {
-            <div class="row">
-                <div class="col-sm">
-                    <a href="#">
-                        <img src="@item.ImageURL" alt="image" height="80" width="60">
-                    </a><br />
-                    @item.Name
-                </div>
-                }
-                else if (i == 4)
-                {
-                i = 0;
-            </div>
-        }
-        else
-        {
-            <div class="col-sm">
-                <a href="#">
-                    <img src="@item.ImageURL" alt="image" height="80" width="60">
-                </a><br />
-                @item.Name
-            </div>
-        }
-        i = i + 1;
-
-    }
-</div>
 
 <section class="blog-posts grid-posts">
     <div class="container">
@@ -60,24 +28,24 @@
                 <div class="post-wrap margin-bottom-26">
                     <div class="product-content product-fourcolumn clearfix">
                         <ul class="product style2">
-                                @foreach (var item in Model)
-                                {
-                                    <li class="product-item">
-                                        <div class="product-thumb clearfix">
-                                            <a href="#">
-                                                <img src="@item.ImageURL" alt="image">
-                                            </a>
-                                        </div>
-                                        <div class="product-info clearfix">
-                                            <br />
-                                            <span class="product-title">@item.Name</span>
-                                        </div>
-                                    </li>
+                            @foreach (var item in Model)
+                            {
+                                <li class="product-item">
+                                    <div class="thumbnail">
+                                        <a href="#">
+                                            <img src="@item.ImageURL" alt="image">
+                                        </a>
+                                    </div>
+                                    <div class="product-info clearfix">
+                                        <br />
+                                        <span class="product-title">@item.Name</span>
+                                    </div>
+                                </li>
 
-                                }
+                            }
 
-                            </ul><!-- /.product -->
-                    </div>                   
+                        </ul><!-- /.product -->
+                    </div>
                 </div><!-- /.post-wrap -->
                 <div class="blog-pagination text-center clearfix">
                     <ul class="flat-pagination">

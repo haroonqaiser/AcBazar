@@ -35,6 +35,21 @@ namespace AcBazar.Web.Controllers
 
             return View();
         }
+
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
+        public ActionResult Support()
+        {
+            return View();
+        }
+
+        public ActionResult Term()
+        {
+            return View();
+        }
     }
 
 

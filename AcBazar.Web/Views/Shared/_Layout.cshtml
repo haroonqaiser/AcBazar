@@ -47,9 +47,12 @@
             <header id="header" class="header header-container clearfix">
                 <div class="container clearfix" id="site-header-inner">
                     <div id="logo" class="logo float-left">
-                        <a href="index.html" title="logo">
-                            <img src="~/Content/images/logo.png" alt="image" width="107" height="24" data-retina="~/Content/images/logo@2x.png" data-width="107" data-height="24">
-                        </a>
+                        <a href="~/Home/" title="logo">
+                            @*<img src="~/Content/images/logo.png" alt="image" width="107" height="24" data-retina="~/Content/images/logo@2x.png" data-width="107" data-height="24">*@
+                            @*<img src="~/Content/images/logo.png" alt="image" width="312" height="43" data-retina="~/Content/images/logo@2x.png" data-width="312" data-height="43">*@
+                            <strong><font size="6">AC</font><font color="red" size="5">Bonanza</font><font size="5">.com</font></strong>
+
+</a>
                     </div><!-- /.logo -->
                     <div class="mobile-button"><span></span></div>
                     <ul class="menu-extra">
@@ -83,18 +86,6 @@
                             <ul class="menu">
                                 <li class="active">
                                     <a href="~/Home">HOME</a>
-                                    <ul class="submenu">
-                                        <li class="active"><a href="index.html">Homepage Style 1</a></li>
-                                        <li><a href="index-v2.html">Homepage Style 2</a></li>
-                                        <li><a href="index-v3.html">Homepage Style 3</a></li>
-                                        <li><a href="index-v4.html">Homepage Style 4</a></li>
-                                        <li><a href="index-v5.html">Homepage Style 5</a></li>
-                                        <li><a href="index-v6.html">Homepage Style 6</a></li>
-                                        <li><a href="index-v7.html">Homepage Style 7</a></li>
-                                        <li><a href="index-v8.html">Homepage Style 8</a></li>
-                                        <li><a href="index-v9.html">Homepage Style 9</a></li>
-                                        <li><a href="index-v10.html">Homepage Style 10</a></li>
-                                    </ul>
                                 </li>
                                 <li>
                                     <a href="~/BRAND/">BRANDS</a>
@@ -124,18 +115,9 @@
                                 </li>
                                 <li>
                                     <a href="~/Home/About/">ABOUT</a>
-                                    <ul class="submenu">
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                        <li><a href="404.html"> Error 404</a></li>
-                                        <li><a href="faqs.html">FAQs</a></li>
-                                    </ul>
                                 </li>
                                 <li>
                                     <a href="~/Home/Contact/">CONTACT</a>
-                                    <ul class="submenu right-submenu">
-                                        <li><a href="contact.html">Contact Style 1</a></li>
-                                        <li><a href="contact-v2.html">Contact Style 2</a></li>
-                                    </ul>
                                 </li>
                             </ul>
                         </nav><!-- /.mainnav -->
@@ -187,10 +169,10 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-link">
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">News Letter</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li><a href="~/Home/About/">About Us</a></li>
+                                <li><a href="~/Home/Support/">Support</a></li>
+                                @*<li><a href="#">News Letter</a></li>*@
+                                <li><a href="~/Home/Contact/">Contact Us</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->
@@ -207,9 +189,9 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-link link-faq">
                             <ul>
-                                <li><a href="faqs.html">FAQs</a></li>
-                                <li><a href="#">Term & Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="~/Home/FAQs">FAQs</a></li>
+                                <li><a href="~/Home/Term">Term & Conditions</a></li>
+                                <li><a href="~/Home/PrivacyPolicy">Privacy Policy</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div><!-- /.widget -->
@@ -217,12 +199,15 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-brand">
                             <div class="logo logo-footer">
-                                <a href="index.html"><img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24"></a>
+                                <a href="~/Home">
+                                    @*<img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24">*@
+                                    <strong><font size="5">AC</font><font color="red" size="4">Bonanza</font><font size="4">.com</font></strong>
+                                </a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">112 Kingdom, NA 12, New York</li>
-                                <li class="phone">+12 345 678 910</li>
-                                <li class="email">infor.deercreative@gmail.com</li>
+                                <li class="address">Suit # 12, First Floor, Queen's Centre, Queen's Road</li>
+                                <li class="phone">+92 307 589 7300</li>
+                                <li class="email">`info@acbonanza.com</li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->
@@ -234,7 +219,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="copyright text-center">Copyright 2018 <a href="#">Modaz</a></p>
+                        <p class="copyright text-center">Copyright 2019 <a href="~/Home">ACBonanza.com</a></p>
                     </div>
                 </div>
             </div>

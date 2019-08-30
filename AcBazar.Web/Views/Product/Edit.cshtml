@@ -1,6 +1,6 @@
 ﻿@model Product
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Product";
 }
 <header>
     @Scripts.Render("~/Content/javascript/jquery.min.js")
@@ -79,10 +79,11 @@
                         </div>
                     </div>
                     <div class="contact-message clearfix">
+                        function
                         <label>Image</label>
                         <input type="file" size="30" name="Image" aria-required="true" id="ImageUpload" accept=".jpg, .png">
                         <input type="hidden" name="RowAddDate" value="@Model.RowAddDate" />
-                        <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL"/>
+                        <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL" />
                         <img id="ProductImage" />
                     </div>
                     <div class="form-submit">
@@ -97,7 +98,7 @@
 
 
 <script>
-    $("#btnEdit").click(function () {
+    $("#btnEdit").click( () {
         $.ajax({
             type: "POST",
             url: '/Product/Edit',

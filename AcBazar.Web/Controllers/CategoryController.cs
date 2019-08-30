@@ -17,29 +17,39 @@ namespace AcBazar.Web.Controllers
             var categories = categoryService.GetCategories();
             return View(categories);
         }
+        public ActionResult MainInfo(string dataSearch)
+        {
+            //var a = Request["Search"];
+            var category = categoryService.GetCategories();
+            if (!string.IsNullOrEmpty(dataSearch))
+            {
+                category = category.Where(x => x.Name.ToLower().Contains(dataSearch.ToLower())).ToList();
+            }
+            return PartialView(category);
+        }
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
         [HttpPost]
         public ActionResult Create(Category category)
         {
             categoryService.SaveCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("MainInfo");
         }
 
         [HttpGet]
         public ActionResult Edit(int ID)
         {
             var category = categoryService.GetCategory(ID);
-            return View(category);
+            return PartialView(category);
         }
         [HttpPost]
         public ActionResult Edit(Category category)
         {
             categoryService.UpdateCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("MainInfo");
         }
 
         [HttpGet]
@@ -51,8 +61,9 @@ namespace AcBazar.Web.Controllers
         [HttpPost]
         public ActionResult Delete(Category category)
         {
+            category = categoryService.GetCategory(category.ID);
             categoryService.DeleteCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("MainInfo");
         }
     }
 }

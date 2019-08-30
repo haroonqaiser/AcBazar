@@ -28,6 +28,14 @@ namespace AcBazar.Services
             }
         }
 
+        public List<Product> GetProducts(List<int> IDs)
+        {
+            using (var context = new ACContext())
+            {
+                return context.Products.Where(x=> IDs.Contains(x.ID)).Include(x => x.Category).Include(x => x.Brand).ToList();
+                //return context.Products.ToList();
+            }
+        }
         //public List<Product> GetProducts(string ProductSearch)
         //{
         //    using (var context = new ACContext())

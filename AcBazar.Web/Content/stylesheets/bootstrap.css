@@ -684,6 +684,21 @@ mark,
   height: auto;
 }
 
+.thumbnail img {
+    padding: 0.25rem;
+    background-color: #fff;
+    border: 1px thin #ddd;
+    border-radius: 0.25rem;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    height: 150px;
+    width: 100%;
+}
+
+.thumbnail-label {
+    text-align: center;
+}
 .figure {
   display: inline-block;
 }
