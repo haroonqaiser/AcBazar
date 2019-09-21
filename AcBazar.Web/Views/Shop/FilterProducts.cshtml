@@ -1,0 +1,89 @@
+﻿@model FilterProductsViewModel
+<div class="filter-shop clearfix">
+    <p class="showing-product float-right">
+        Showing @(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + 1)–@(((Model.Pager.CurrentPage - 1) * Model.Pager.PageSize) + (Model.Products.Count < Model.Pager.PageSize? Model.Products.Count: Model.Pager.PageSize)) of @Model.Pager.TotalItems Products
+    </p>
+</div><!-- /.filte-shop -->
+<div class="product-content product-threecolumn product-slidebar clearfix">
+    <ul class="product style2 sd1">
+        @foreach (var item in Model.Products)
+        {
+            var defaultImageURL = "/Content/images/gallery/gallery-1-870x377.jpg";
+            var ImageURL = string.IsNullOrEmpty(item.ImageURL) ? defaultImageURL : item.ImageURL;
+            <li class="product-item">
+                <div class="product-thumb clearfix">
+                    <a href="@Url.Action("ShoptDetail", "Shop", new{ ProductID = item.ID })">
+                        <img src="@ImageURL" alt="image">
+                    </a>
+                    @if (item.IsSale && item.AmountDis > 0)
+                    {
+                        <span class="new sale">Sale</span>
+                    }
+                    @if (!item.IsSale && item.IsNew)
+                    {
+                        <span class="new">New</span>
+                    }
+                </div>
+                <div class="product-info clearfix">
+                    <span class="product-title">@item.Name</span>
+                    <div class="price">
+                        <ins>
+                            @if (item.IsSale && item.AmountDis > 0)
+                            {
+                                <del>
+                                    <span class="regular">Rs.@String.Format("{0:n0}", item.Price)</span>
+                                </del>
+                                <ins>
+                                    <span class="amount">Rs.@String.Format("{0:n0}", item.AmountDis)</span>
+                                </ins>
+                            }
+                            else
+                            {
+                                <ins>
+                                    <span class="amount">Rs.@String.Format("{0:n0}", item.Price)</span>
+                                </ins>
+                            }
+                        </ins>
+                    </div>
+                </div>
+                <div class="add-to-cart text-center">
+                    <a href="#">ADD TO CART</a>
+                </div>
+                <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
+            </li>
+        }
+
+    </ul><!-- /.product -->
+</div><!-- /.product-content -->
+@if (Model.Pager != null)
+{
+    <div class="blog-pagination text-center clearfix" id="pgclass">
+        <ul class="flat-pagination">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li class="first">
+                    <a class="pagination" data-pageno="1"><i class="fa fa-angle-double-left"></i></a>
+                </li>
+                <li class="prev">
+                    <a class="pagination prev" data-pageno="@(Model.Pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                </li>
+            }
+
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeClass = Model.Pager.CurrentPage == page ? "active" : string.Empty;
+                <li class="@activeClass"><a title="" class="@activeClass pagination" data-pageno="@page">@page</a></li>
+            }
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li><a class="pagination" data-pageno="@(Model.Pager.CurrentPage+ 1)"><i class="fa fa-angle-right"></i></a></li>
+                <li><a class="pagination" data-pageno="@Model.Pager.TotalPages"><i class="fa fa-angle-double-right"></i></a></li>
+            }
+
+        </ul><!-- /.flat-pagination -->
+    </div><!-- /.blog-pagination -->
+}
+
+
+

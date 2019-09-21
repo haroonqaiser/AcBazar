@@ -1,0 +1,96 @@
+﻿@model AcBazar.Web.ViewModels.BrandSearchViewModel
+
+
+<section class="blog-posts grid-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="post-wrap margin-bottom-26">
+                    <div class="product-content product-fourcolumn clearfix">
+                            <ul class="product style2">
+                                @foreach (var item in Model.brand)
+                                {
+                                    <li class="product-item">
+                                        <div class="thumbnail img">
+                                            <a href="#">
+                                                <img src="@item.ImageURL" alt="image">
+                                            </a>
+                                        </div>
+                                        <div class="product-info clearfix">
+                                            <br />
+                                            <span class="product-title">@item.Name</span>
+                                        </div>
+                                    </li>
+
+                                }
+
+                            </ul>
+
+                            <!-- /.product -->
+
+                    </div>
+                </div><!-- /.post-wrap -->
+        
+                        @if (Model.pager != null)
+                    {
+                        <div class="blog-pagination text-center clearfix" id="pgclass">
+                            <ul class="flat-pagination">
+                                @if (Model.pager.CurrentPage > 1)
+                                {
+                                    <li class="first">
+                                        <a href="#" class="pagination" data-pageno="1"><i class="fa fa-angle-double-left"></i></a>
+                                    </li>
+                                    <li class="prev">
+                                        <a href="#" class="pagination prev" data-pageno="@(Model.pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                                    </li>
+                                }
+
+                                @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                                {
+                                    string activeClass = Model.pager.CurrentPage == page ? "active" : string.Empty;
+                                    <li class="@activeClass"><a href="#" title="" class="@activeClass pagination" data-pageno="@page">@page</a></li>
+                                }
+
+                                @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                                {
+                                    <li><a href="#" class="pagination" data-pageno="@(Model.pager.CurrentPage+ 1)"><i class="fa fa-angle-right"></i></a></li>
+                                    <li><a href="#" class="pagination" data-pageno="@Model.pager.TotalPages"><i class="fa fa-angle-double-right"></i></a></li>
+                                }
+
+                            </ul><!-- /.flat-pagination -->
+                        </div><!-- /.blog-pagination -->
+                    }
+
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+
+    <script>
+        $(".pagination").click(function () {
+            $.ajax({
+                url: '@Url.Action("MainInfo", "Brand")',
+                data: {
+                    pageNo: $(this).attr("data-pageno"),
+                    dataSearch: '@Model.SearchTerm'
+                }
+            })
+                .done(function (data) {
+                    $("#SearchRecords").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+    </script>
+
+
+</section>
+
+
+

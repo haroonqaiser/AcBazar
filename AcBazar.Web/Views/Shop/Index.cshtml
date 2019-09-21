@@ -1,0 +1,226 @@
+﻿@using AcBazar.Web.Code
+@model  AcBazar.Web.ViewModels.ShopViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Page title -->
+<div class="page-title parallax parallax1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title-heading">
+                    <h1 class="title">Shop</h1>
+                </div><!-- /.page-title-heading -->
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index", "Shop")">Shop</a></li>
+                    </ul>
+                </div><!-- /.breadcrumbs -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.page-title -->
+
+<section class="flat-row main-shop shop-slidebar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar slidebar-shop">
+                    <div class="widget widget-search">
+                        <form role="search" method="get" class="search-form" action="@Url.Action("Index", "Shop")">
+                            <label>
+                                <input type="search" class="search-field" placeholder="Search …" value="" name="SearchTerm">
+                            </label>
+                            <input type="submit" class="search-submit" value="Search">
+                        </form>
+                    </div><!-- /.widget-search -->
+                    <div class="widget widget-sort-by">
+                        <h5 class="widget-title">
+                            Sort By
+                        </h5>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "Shop", new { sortBy = (int)SortByEnum.Default, categoryID = Model.CategoryID})" class="@(Model.sortBy.HasValue ? Model.sortBy.Value == (int)SortByEnum.Default ? "active" : string.Empty : string.Empty)">Default - Newest</a></li>
+                            <li><a href="@Url.Action("Index", "Shop", new { sortBy = (int)SortByEnum.Popularity, categoryID = Model.CategoryID })" class="@(Model.sortBy.HasValue ? Model.sortBy.Value == (int)SortByEnum.Popularity ? "active" : string.Empty : string.Empty)">Popularity</a></li>
+                            <li><a href="@Url.Action("Index", "Shop", new { sortBy = (int)SortByEnum.PriceLowToHigh, categoryID = Model.CategoryID })" class="@(Model.sortBy.HasValue ? Model.sortBy.Value == (int)SortByEnum.PriceLowToHigh ? "active" : string.Empty : string.Empty)">Price: low to high</a></li>
+                            <li><a href="@Url.Action("Index", "Shop", new { sortBy = (int)SortByEnum.PriceHighToLow, categoryID = Model.CategoryID })" class="@(Model.sortBy.HasValue ? Model.sortBy.Value == (int)SortByEnum.PriceHighToLow ? "active" : string.Empty : string.Empty)">Price: high to low</a></li>
+                        </ul>
+                    </div><!-- /.widget-sort-by -->
+                    @*
+        <div class="widget widget-color">
+            <h5 class="widget-title">
+                Colors
+            </h5>
+            <ul class="flat-color-list icon-left">
+                <li><a href="#" class="yellow"></a><span>Yellow</span> <span class="pull-right">25</span></li>
+                <li><a href="#" class="pink"> </a><span>White</span> <span class="pull-right">16</span></li>
+                <li><a href="#" class="red active"></a><span>Red</span> <span class="pull-right">28</span></li>
+                <li><a href="#" class="black"></a><span>Black</span> <span class="pull-right">12</span></li>
+                <li><a href="#" class="blue"></a><span>Green</span> <span class="pull-right">0</span></li>
+            </ul>
+        </div><!-- /.widget-color -->
+
+                    <div class="widget widget-size">
+                        <h5 class="widget-title">
+                            Capacity
+                        </h5>
+                        <ul>
+                            <li class="checkbox">
+                                <input type="checkbox" name="checkbok1" id="checkbox1">
+                                <label for="checkbox1">
+                                    <a href="#">1 Ton</a>
+                                </label>
+                            </li>
+                            <li class="checkbox">
+                                <input type="checkbox" name="checkbok2" id="checkbox2">
+                                <label for="checkbox2">
+                                    <a href="#">1.5 Ton</a>
+                                </label>
+                            </li>
+                            <li class="checkbox">
+                                <input type="checkbox" name="checkbok3" id="checkbox3">
+                                <label for="checkbox3">
+                                    <a href="#">2 Ton</a>
+                                </label>
+                            </li>
+                            <li class="checkbox">
+                                <input type="checkbox" name="checkbok4" id="checkbox4">
+                                <label for="checkbox4">
+                                    <a href="#">4 Ton</a>
+                                </label>
+                            </li>
+                            <li class="checkbox">
+                                <input type="checkbox" name="checkbok5" id="checkbox5">
+                                <label for="checkbox5">
+                                    <a href="#">5 Ton</a>
+                                </label>
+                            </li>
+                        </ul>
+                    </div><!-- /.widget-size -->
+                    *@
+                    <div class="widget widget_tag">
+                        <h5 class="widget-title">
+                            Categories
+                        </h5>
+                        <div class="tag-list">
+                            <a href="@Url.Action("Index", "Shop")">All</a>
+
+                            @foreach (var item in Model.FeaturedCategories)
+                            {
+                                <a href="@Url.Action("Index", "Shop", new { categoryID = item.ID, sortBy = Model.sortBy }) " class="@(Model.CategoryID.HasValue && Model.CategoryID == item.ID ? "active" : string.Empty) ">@item.Name</a>
+                            }
+                        </div>
+                    </div><!-- /.widget -->
+                    <div class="widget widget-price">
+                        <h5 class="widget-title">Filter by price</h5>
+                        <div class="price-filter">
+                            <div id="slide-range"></div>
+                            <p class="amount">
+                                Price: <input type="text" id="amount" disabled="">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="widget widget_tag">
+                        @*<h5 class="widget-title">
+                            Reset
+                        </h5>*@
+                        <div class="tag-list">
+                            <a href="@Url.Action("Index", "Shop")" class="active">Reset</a>
+                        </div>
+                    </div><!-- /.widget -->
+
+                </div><!-- /.sidebar -->
+            </div><!-- /.col-md-3 -->
+            <div class="col-md-9">
+                <div id="ProductsDiv">
+                    @{
+                        var model = new FilterProductsViewModel();
+                        model.Products = Model.Products;
+                        model.Pager = Model.Pager;
+                        Html.RenderPartial("FilterProducts", model);
+                     }
+                </div>
+            </div><!-- /.col-md-9 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</section><!-- /.flat-row -->
+
+
+<script>
+
+    //var flatPrice = $(function () {
+    //            $("#slide-range").slider({
+    //                range: true,
+    //                min: 0,
+    //                max: 2900,
+    //                values: [0, 2900],
+    //                slide: function (event, ui) {
+    //                    $("#amount").val("$" + ui.values[0] + ".00" + " - " + "$" + ui.values[1] + ".00");
+    //                }
+    //            });
+    //            $("#amount").val($("#slide-range").slider("values", 0) + "$" + " - " + $("#slide-range").slider("values", 1) + "$");
+    //        });
+    var callTimeout;
+    var PriceSlider = $("#slide-range").slider({
+            range: true,
+            min: 0,
+            max: @Model.MaximumPrice,
+            values: [0, @Model.MaximumPrice],
+            slide: function (event, ui) {
+            var minPrice = ui.values[0];
+            var maxPrice = ui.values[1];
+                $("#amount").val("Rs." + minPrice + ".00" + " - " + "Rs." + maxPrice + ".00");
+                console.log("slided");
+                callTimeout = setTimeout(GetData, 1000)
+            }
+        });
+</script>
+
+<script>
+    function GetData() {
+        $.ajax({
+            url: '@Url.Action("FilterProducts", "Shop")',
+            data: {
+                pageNo: $(this).attr("data-pageno"),
+                sortBy: '@Model.sortBy',
+                categoryID: '@Model.CategoryID',
+                minimumPrice: PriceSlider.slider("values", 0),
+                maximumPrice: PriceSlider.slider("values", 1)
+            }
+        })
+            .done(function (response) {
+                $("#ProductsDiv").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Fail");
+            });
+    }
+</script>
+
+<script>
+        $(".pagination").click(function () {
+            $.ajax({
+                url: '@Url.Action("FilterProducts", "Shop")',
+                data: {
+                    pageNo: $(this).attr("data-pageno"),
+                    sortBy: '@Model.sortBy',
+                    categoryID: '@Model.CategoryID',
+                    minimumPrice: PriceSlider.slider("values", 0),
+                    maximumPrice: PriceSlider.slider("values", 1)
+                }
+            })
+                .done(function (data) {
+                    $("#ProductsDiv").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+</script>

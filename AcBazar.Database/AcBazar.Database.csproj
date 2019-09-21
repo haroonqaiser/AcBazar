@@ -53,11 +53,61 @@
     <Compile Include="Migrations\201908192143170_initalization.Designer.cs">
       <DependentUpon>201908192143170_initalization.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908302355091_isfeatured.cs" />
+    <Compile Include="Migrations\201908302355091_isfeatured.Designer.cs">
+      <DependentUpon>201908302355091_isfeatured.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908312106342_discountfeatures.cs" />
+    <Compile Include="Migrations\201908312106342_discountfeatures.Designer.cs">
+      <DependentUpon>201908312106342_discountfeatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908312107413_discountfeatures1.cs" />
+    <Compile Include="Migrations\201908312107413_discountfeatures1.Designer.cs">
+      <DependentUpon>201908312107413_discountfeatures1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908312120189_discountfeatures2.cs" />
+    <Compile Include="Migrations\201908312120189_discountfeatures2.Designer.cs">
+      <DependentUpon>201908312120189_discountfeatures2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909041254445_basicconfig.cs" />
+    <Compile Include="Migrations\201909041254445_basicconfig.Designer.cs">
+      <DependentUpon>201909041254445_basicconfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909071538188_productspecsadd.cs" />
+    <Compile Include="Migrations\201909071538188_productspecsadd.Designer.cs">
+      <DependentUpon>201909071538188_productspecsadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909071611458_productspecsmappadd.cs" />
+    <Compile Include="Migrations\201909071611458_productspecsmappadd.Designer.cs">
+      <DependentUpon>201909071611458_productspecsmappadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909072244520_productspecsdetailadd.cs" />
+    <Compile Include="Migrations\201909072244520_productspecsdetailadd.Designer.cs">
+      <DependentUpon>201909072244520_productspecsdetailadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909082251327_productspecskeychange.cs" />
+    <Compile Include="Migrations\201909082251327_productspecskeychange.Designer.cs">
+      <DependentUpon>201909082251327_productspecskeychange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909172021303_ProductTypeAdd.cs" />
+    <Compile Include="Migrations\201909172021303_ProductTypeAdd.Designer.cs">
+      <DependentUpon>201909172021303_ProductTypeAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909182051096_specdetailsadd.cs" />
+    <Compile Include="Migrations\201909182051096_specdetailsadd.Designer.cs">
+      <DependentUpon>201909182051096_specdetailsadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909182055050_specdetailsadd2.cs" />
+    <Compile Include="Migrations\201909182055050_specdetailsadd2.Designer.cs">
+      <DependentUpon>201909182055050_specdetailsadd2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +119,42 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908192143170_initalization.resx">
       <DependentUpon>201908192143170_initalization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908302355091_isfeatured.resx">
+      <DependentUpon>201908302355091_isfeatured.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908312106342_discountfeatures.resx">
+      <DependentUpon>201908312106342_discountfeatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908312107413_discountfeatures1.resx">
+      <DependentUpon>201908312107413_discountfeatures1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908312120189_discountfeatures2.resx">
+      <DependentUpon>201908312120189_discountfeatures2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909041254445_basicconfig.resx">
+      <DependentUpon>201909041254445_basicconfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909071538188_productspecsadd.resx">
+      <DependentUpon>201909071538188_productspecsadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909071611458_productspecsmappadd.resx">
+      <DependentUpon>201909071611458_productspecsmappadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909072244520_productspecsdetailadd.resx">
+      <DependentUpon>201909072244520_productspecsdetailadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909082251327_productspecskeychange.resx">
+      <DependentUpon>201909082251327_productspecskeychange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909172021303_ProductTypeAdd.resx">
+      <DependentUpon>201909172021303_ProductTypeAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909182051096_specdetailsadd.resx">
+      <DependentUpon>201909182051096_specdetailsadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909182055050_specdetailsadd2.resx">
+      <DependentUpon>201909182055050_specdetailsadd2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

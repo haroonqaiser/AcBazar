@@ -1,4 +1,4 @@
-﻿@model Product
+﻿@model AcBazar.Web.ViewModels.ProductDetail
 @{
     ViewBag.Title = "Edit Product";
 }
@@ -7,7 +7,8 @@
 </header>
 
 
-<section class="flat-row flat-contact">
+<!-- Blog posts -->
+<section class="blog-posts style1">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -19,99 +20,274 @@
             </div><!-- /.col-md-12 -->
         </div><!-- /.row -->
         <div class="row">
-            <div class="wrap-contact style2">
-                <form novalidate="" class="contact-form" id="editProduct" method="post">
-                    <div class="form-text-wrap clearfix">
-                        <div class="row"><input type="hidden" name="ID" value="@Model.ID" /></div>
-                        <div class="row">
-                            <div class="contact-name">
-                                <label>Category</label>
-                                <select name="CategoryId" aria-required="true" class="form-control form-control-lg">
-                                    @{ int i;}
-                                    @foreach (var categoryList in ViewBag.CategoryList)
+            <div class="col-md-9">
+                <div class="post-wrap style1">
+                    <article class="post clearfix">
+                        <div class="title-post">
+                            <h2><a href="blog-detail.html">Product Information</a></h2>
+                        </div><!-- /.title-post -->
+
+                        <form novalidate="" class="contact-form" id="editProduct" method="post">
+
+                            <!-- New Form Code Start -->
+                            <div class="row"><input type="hidden" name="ID" value="@Model.product.ID" /></div>
+
+                            <div class="content-post ">
+                                <div class="meta-post">
+                                    <div class="featured-post">
+                                        @*<span>Posted By: </span><a href="#">Admin</a>*@
+                                        <label>Product Type</label>
+                                        <select name="ProductTypeId" aria-required="true" class="form-control form-control-lg">
+                               
+                                            @foreach (var productTypeList in ViewBag.ProductTypeList)
+                                            {
+                                                if (Model.product.CategoryId == productTypeList.ID)
+                                                {
+                                                    <option value="@productTypeList.ID" selected="selected">@productTypeList.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@productTypeList.ID">@productTypeList.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="featured-post">
+                                        @*<span>Posted By: </span><a href="#">Admin</a>*@
+                                        <label>Category</label>
+                                        <select name="CategoryId" aria-required="true" class="form-control form-control-lg">
+                                            @{ int i;}
+                                            @foreach (var categoryList in ViewBag.CategoryList)
+                                            {
+                                                if (Model.product.CategoryId == categoryList.ID)
+                                                {
+                                                    <option value="@categoryList.ID" selected="selected">@categoryList.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@categoryList.ID">@categoryList.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="featured-post">
+                                        @*<span>Posted By: </span><a href="#">Admin</a>*@
+                                        <label>Brand</label>
+                                        <select name="BrandId" aria-required="true" class="form-control form-control-lg">
+                                            @foreach (var brandList in ViewBag.BrandList)
+                                            {
+                                                if (Model.product.BrandId == brandList.ID)
+                                                {
+                                                    <option value="@brandList.ID" selected="selected">@brandList.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@brandList.ID">@brandList.Name</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div><!-- /.meta-post -->
+
+                                <div class="featured-post">
+                                    <label>Name</label>
+                                    <input type="text" placeholder="Name" size="30" name="Name" aria-required="true" value="@Model.product.Name">
+                                </div>
+                                <ul class="meta-post">
+                                    <li class="author padding-left-2 col-md-5">
+                                        <label>Price</label>
+                                        <input type="text" size="30" name="Price" aria-required="true" value="@Model.product.Price">
+                                    </li>
+                                    <li class="author padding-left-2 col-md-5">
+                                        <label>Discount</label>
+                                        <input type="text" size="30" name="AmountDis" aria-required="true" value="@Model.product.AmountDis">
+                                    </li>
+                                </ul><!-- /.meta-post -->
+
+                                <div class="contact-message clearfix">
+                                    <label>Description</label>
+                                    <textarea tabindex="4" id="txtDescription" size="30" name="Description">@Model.product.Description</textarea>
+                                </div>
+
+
+                                <ul class="meta-post">
+                                    <li class="author padding-left-2 col-md-5">
+                                        <label>Is Sale:</label>
+                                        <input name="IsSale" type="checkbox" style="display:initial" checked="@Model.product.IsSale" />
+                                        <label>Is New:</label>
+                                        <input name="IsNew" type="checkbox" style="display:initial" checked="@Model.product.IsNew" />
+                                        <label>Is Best:</label>
+                                        <input name="IsBest" type="checkbox" style="display:initial" checked="@Model.product.IsBest" />
+                                        <label>Is Cancel:</label>
+                                        <input name="IsCancel" type="checkbox" style="display:initial" checked="@Model.product.IsCancel" />
+
+                                    </li>
+                                </ul><!-- /.meta-post -->
+
+                                <ul class="meta-post">
+                                    <li class="author padding-left-2 col-md-5">
+                                        <input type="hidden" name="RowAddDate" value="@Model.product.RowAddDate" />
+                                        <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.product.ImageURL" />
+                                        @*
+        <input type="file" size="30" name="Image" aria-required="true" id="ImageUpload" accept=".jpg, .png">
+                                        *@
+                                    </li>
+                                </ul><!-- /.meta-post -->
+
+                                <div class="featured-post">
+
+                                </div>
+                                <div class="entry-post">
+                                    @*<p>When the Tunisian-born couturier Azzedine Alaïa passed away in Paris on November 18, tributes began pouring in from the fashion world, as his friends and fans celebrated his work and sought to preserve his legacy. Now, London's Design Museum has announced that it will...</p>
+                <div class="more-link">
+                    <a href="blog-detail.html">Read More</a>
+                </div>*@
+                                </div>
+                            </div><!-- /.content-post -->
+                            <!-- New Form Code End -->
+                        </form>
+
+                        <form id="CreateProductDetail" method="post">
+                            <div class="form-text-wrap clearfix">
+                                <table id="tblProductDetail">
+                                    <tr>
+                                        <td colspan="2"><h2><u>Item Specification</u></h2></td>
+                                    </tr>
+                                    @foreach (var item in Model.productSpecs)
                                     {
-                                        if (Model.CategoryId == categoryList.ID)
-                                        {
-                                            <option value="@categoryList.ID" selected="selected">@categoryList.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@categoryList.ID">@categoryList.Name</option>
-                                        }
+                                        <tr>
+                                            <td>
+                                                <input class="txtproductid" type="hidden" placeholder="ProductID" size="30" name="ProductID" id="txtProductID" cid="">
+                                                <input class="txtSpecKey" type="hidden" placeholder="SpecKey" size="30" name="ProductSpecsID" id="txtSpecKey" cid="@item.SpecKey" value="@item.SpecKey">
+                                                <label>@item.SpecValue</label>
+                                            </td>
+                                            <td>
+                                                @{
+                                                    string itemspecname = "";
+
+                                                    var itm = Model.productSpecMapp.FirstOrDefault(x => x.ProductID == Model.product.ID && x.SpecKey == item.SpecKey);
+
+                                                    if (itm != null)
+                                                    {
+                                                        itemspecname = Model.productSpecMapp.Find(x => x.ProductID == Model.product.ID && x.SpecKey == item.SpecKey && x.ProductID.ToString() != null).Name.ToString();
+                                                    }
+
+
+                                                }
+
+                                                @if (item.SpecInputValueType == "LongString")
+                                                {
+                                                <textarea class="txtName" tabindex="4" size="30" name="Name" id="txtName" placeholder=@item.SpecValue required="">@itemspecname</textarea>
+                                                }
+                                                else
+                                                {
+                                                    <input class="txtName" type="text" placeholder=@item.SpecValue size="30" name="Name" id="txtName" value="@itemspecname">
+                                                }
+
+                                            </td>
+                                        </tr>
                                     }
-                                </select>
+                                    <tr class="form-submit">
+                                        <td>
+                                            <button type="button" class="contact-submit" id="btnUpdate">UPDATE</button>
+                                            <button type="button" class="contact-submit" id="btnCancel">CANCEL</button>
+                                        </td>
+                                    </tr>
+                                </table>
 
                             </div>
+                        </form>
+                    </article><!-- /.post -->
 
-                            <div class="contact-name">
-                                <label>Brand</label>
-                                <select name="BrandId" aria-required="true" class="form-control form-control-lg">
-                                    @foreach (var brandList in ViewBag.BrandList)
-                                    {
-                                        if (Model.BrandId == brandList.ID)
-                                        {
-                                            <option value="@brandList.ID" selected="selected">@brandList.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@brandList.ID">@brandList.Name</option>
-                                        }
-                                    }
-                                </select>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="contact-name">
-                                <label></label>
-                                <input type="text" placeholder="Name" size="30" name="Name" aria-required="true" value="@Model.Name">
-                            </div>
-                            <div class="contact-name">
-                                <label></label>
-                                <input type="text" placeholder="Description" size="30" name="Description" aria-required="true" value="@Model.Description">
-                            </div>
-                            <div class="contact-name">
-                                <label></label>
-                                <input type="text" placeholder="Price" size="30" name="Price" aria-required="true" value="@Model.Price">
-                            </div>
-                        </div>
-                        <div class="contact-subject">
-                        </div>
-                    </div>
-                    <div class="contact-message clearfix">
-                        function
-                        <label>Image</label>
-                        <input type="file" size="30" name="Image" aria-required="true" id="ImageUpload" accept=".jpg, .png">
-                        <input type="hidden" name="RowAddDate" value="@Model.RowAddDate" />
-                        <input name="ImageURL" type="hidden" id="ImageURL" value="@Model.ImageURL" />
-                        <img id="ProductImage" />
-                    </div>
-                    <div class="form-submit">
-                        <button type="button" class="contact-submit" id="btnEdit">Update</button>
-                    </div>
-                </form>
+                </div><!-- /.wrap-contact -->
             </div><!-- /.wrap-contact -->
+
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <div class="widget widget_categories">
+                        <h5 class="widget-title">Picture</h5>
+                        <div class="featured-post">
+                            <input type="file" size="30" name="Image" aria-required="true" id="ImageUpload" accept=".jpg, .png">
+
+                            @{ var ImageURL = String.IsNullOrEmpty(Model.product.ImageURL) ? "/Content/images/blog/4.jpg" : Model.product.ImageURL;}
+
+                            <img id="ProductImage" src="@ImageURL" alt="image">
+                        </div>
+                    </div><!-- /.widget-categories -->
+                </div><!-- /.sidebar -->
+            </div><!-- /.col-md-3 -->
+
         </div><!-- /.row -->
+
+
     </div><!-- /.container -->
-</section><!-- /.flat-row -->
+</section>
+<!-- /.blog posts -->
 
 
 
 <script>
-    $("#btnEdit").click( () {
+    $("#btnUpdate").click(function () {
         $.ajax({
             type: "POST",
-            url: '/Product/Edit',
+            url: '@Url.Action("Edit", "Product")',
             data: $("#editProduct").serialize()
         })
-            .done(function (data) {
-                $("#SearchProduct").html(data);
-                $("#ActionContainer").html("");
+            .done(function (response) {
+                 if (response) {
+                      var productSpecMapp = [];
+                            $("#tblProductDetail tr").each(function () {
+                                var productID = '@Model.product.ID';
+                                var specKey = $(this).find('input[name="ProductSpecsID"]').val();
+                                var name = $(this).find('input[name="Name"]').val();
+                                if (name == null || name == "") {
+                                    name = $(this).find('textarea[name="Name"]').val();
+                                }
+                                var a = { ProductID: productID, SpecKey: specKey, Name: name };
+                                productSpecMapp.push(a);
+                            });
+                    productSpecMapp = JSON.stringify({ 'productSpecMapp': productSpecMapp });
+                        $.ajax({
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            type: 'POST',
+                            url: '@Url.Action("CreateProductDetail", "Product")',
+                            data: productSpecMapp
+                        })
+                            .done(function (data) {
+                                if (data) {
+                                    //$("#ImageURL").val(response.ImageURL);
+                                    $.ajax({
+                                        type: "GET",
+                                        url: '@Url.Action("ProductInfo", "Product")'
+                                    })
+                                        .done(function (data) {
+                                            $("#ActionContainer").html("");
+                                            $("#SearchProduct").html(data);
+                                            focusaction("editProduct");
+                                        })
+                                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                            alert('Failed');
+                                        });
+                                }
+
+                            })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                debugger;
+                                alert('Failed');
+                            });
+                }
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                 alert('Failed');
             });
     });
+
+     $("#btnCancel").click(function () {
+                $("#ActionContainer").html("");
+                focusaction("SearchProduct");
+    });
+
 </script>
 
 <script>
@@ -127,7 +303,7 @@
 
         $.ajax({
             type: "POST",
-            url: '/Shared/UploadImage',
+            url: '@Url.Action("UploadImage", "Shared")',
             //dataType:'json',
             data: formData,
             contentType: false,
@@ -147,3 +323,4 @@
 
     });
 </script>
+

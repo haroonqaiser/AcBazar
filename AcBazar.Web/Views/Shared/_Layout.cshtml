@@ -4,7 +4,7 @@
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <title>Modaz HTML Template</title>
+    <title>Online AC shopping in Pakistan - AcBonanza.com</title>
 
     <meta name="author" content="themesflat.com">
 
@@ -24,7 +24,6 @@
     <!-- Animation Style -->
     <link rel="stylesheet" type="text/css" href="~/Content/stylesheets/animate.css">
 
-
     <!-- Favicon and touch icons  -->
     <link href="~/Content/icon/favicon.png" rel="shortcut icon">
 
@@ -33,6 +32,8 @@
         <script src="~/Content/javascript/respond.min.js"></script>
     <![endif]-->
     <script src="~/Content/javascript/jquery.min.js"></script>
+    <script src="~/Content/javascript/jquery-ui.js"></script>
+
 </head>
 <body class="header_sticky header-style-1 has-menu-extra">
     <!-- Preloader -->
@@ -47,12 +48,12 @@
             <header id="header" class="header header-container clearfix">
                 <div class="container clearfix" id="site-header-inner">
                     <div id="logo" class="logo float-left">
-                        <a href="~/Home/" title="logo">
+                        <a href="@Url.Action("Index","Home")" title="logo">
                             @*<img src="~/Content/images/logo.png" alt="image" width="107" height="24" data-retina="~/Content/images/logo@2x.png" data-width="107" data-height="24">*@
                             @*<img src="~/Content/images/logo.png" alt="image" width="312" height="43" data-retina="~/Content/images/logo@2x.png" data-width="312" data-height="43">*@
                             <strong><font size="6">AC</font><font color="red" size="5">Bonanza</font><font size="5">.com</font></strong>
 
-</a>
+                        </a>
                     </div><!-- /.logo -->
                     <div class="mobile-button"><span></span></div>
                     <ul class="menu-extra">
@@ -85,39 +86,37 @@
                         <nav id="mainnav" class="mainnav">
                             <ul class="menu">
                                 <li class="active">
-                                    <a href="~/Home">HOME</a>
+                                    <a href="@Url.Action("Index","Home")">HOME</a>
                                 </li>
                                 <li>
-                                    <a href="~/BRAND/">BRANDS</a>
+                                    <a href="@Url.Action("Index","BRAND")">BRANDS</a>
                                     <ul class="submenu">
                                         <li>
-                                            <a href="shop-3col.html">Shop Layouts</a>
+                                            <a href="shop-3col.html">Haier</a>
                                             <ul class="submenu">
-                                                <li><a href="shop-3col.html">Three Columns</a></li>
-                                                <li><a href="shop-4col.html">Four Columns</a></li>
-                                                <li><a href="shop-5col.html">Five Columns</a></li>
-                                                <li><a href="shop-3col-slide.html">Slidebar Three Columns</a></li>
+                                                <li><a href="shop-3col.html">New Arrivals</a></li>
+                                                <li><a href="shop-3col.html">General</a></li>
+                                                <li><a href="shop-3col.html">On Sale</a></li>
                                             </ul>
                                         </li>
                                         <li>
-                                            <a href="shop-detail-des.html">Shop Details</a>
+                                            <a href="shop-detail-des.html">Mitsubishi</a>
                                             <ul class="submenu">
-                                                <li><a href="shop-detail-des.html">Details Description</a></li>
-                                                <li><a href="shop-detail-exter.html">Details External</a></li>
-                                                <li><a href="shop-detail-option.html">Details Options</a></li>
-                                                <li><a href="shop-detail-fix.html">Details Fix</a></li>
-                                                <li><a href="shop-detail-zoom.html">Details Zoom</a></li>
-                                                <li><a href="shop-detail-group.html">Details Grouped</a></li>
-                                                <li><a href="shop-detail-video.html">Details Video</a></li>
+                                                <li><a href="shop-detail-des.html">New Arrivals</a></li>
+                                                <li><a href="shop-detail-des.html">General</a></li>
+                                                <li><a href="shop-3col.html">On Sale</a></li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="~/Home/About/">ABOUT</a>
+                                    <a href="@Url.Action("Index","Shop")">SHOP</a>
                                 </li>
                                 <li>
-                                    <a href="~/Home/Contact/">CONTACT</a>
+                                    <a href="@Url.Action("About","Home")">ABOUT</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Contact","Home")">CONTACT</a>
                                 </li>
                             </ul>
                         </nav><!-- /.mainnav -->
@@ -151,11 +150,11 @@
                                 </div>
                             </form>
                             <ul class="flat-social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="@BasicConfigService.Instance.GetBasicConfiguration("FacebookURL").ConfigDescription"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="@BasicConfigService.Instance.GetBasicConfiguration("TwitterURL").ConfigDescription"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="@BasicConfigService.Instance.GetBasicConfiguration("GoogleURL").ConfigDescription"><i class="fa fa-google"></i></a></li>
+                                <li><a href="@BasicConfigService.Instance.GetBasicConfiguration("TwitterURL").ConfigDescription"><i class="fa fa-behance"></i></a></li>
+                                <li><a href="@BasicConfigService.Instance.GetBasicConfiguration("LinkedinURL").ConfigDescription"><i class="fa fa-linkedin"></i></a></li>
                             </ul><!-- /.flat-social -->
                         </div><!-- /.subscribe -->
                     </div>
@@ -169,10 +168,10 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-link">
                             <ul>
-                                <li><a href="~/Home/About/">About Us</a></li>
-                                <li><a href="~/Home/Support/">Support</a></li>
+                                <li><a href="@Url.Action("About","Home")">About Us</a></li>
+                                <li><a href="@Url.Action("Support","Home")">Support</a></li>
                                 @*<li><a href="#">News Letter</a></li>*@
-                                <li><a href="~/Home/Contact/">Contact Us</a></li>
+                                <li><a href="@Url.Action("Contact","Home")">Contact Us</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->
@@ -189,9 +188,9 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-link link-faq">
                             <ul>
-                                <li><a href="~/Home/FAQs">FAQs</a></li>
-                                <li><a href="~/Home/Term">Term & Conditions</a></li>
-                                <li><a href="~/Home/PrivacyPolicy">Privacy Policy</a></li>
+                                <li><a href="@Url.Action("FAQs","Home")">FAQs</a></li>
+                                <li><a href="@Url.Action("Term","Home")">Term & Conditions</a></li>
+                                <li><a href="@Url.Action("PrivacyPolicy","Home")">Privacy Policy</a></li>
                                 <li><a href="#"></a></li>
                             </ul>
                         </div><!-- /.widget -->
@@ -199,15 +198,18 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-brand">
                             <div class="logo logo-footer">
-                                <a href="~/Home">
+                                <a href="@Url.Action("Index","Home")">
                                     @*<img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24">*@
                                     <strong><font size="5">AC</font><font color="red" size="4">Bonanza</font><font size="4">.com</font></strong>
                                 </a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">Suit # 12, First Floor, Queen's Centre, Queen's Road</li>
-                                <li class="phone">+92 307 589 7300</li>
-                                <li class="email">`info@acbonanza.com</li>
+
+                                @*<li class="address">Suit # 12, First Floor, Queen's Centre, Queen's Road</li>*@
+                                @*<li class="address">@BasicConfigService.Instance.GetBasicConfiguration("CompanyAddress").ConfigDescription </li>
+                                <li class="address">@BasicConfigService.Instance.GetBasicConfiguration("CompanyPhone").ConfigDescription </li>*@
+                                @*<li class="email">info@acbonanza.com</li>*@
+                                <li class="email"><a href="mailto:@BasicConfigService.Instance.GetBasicConfiguration("CompanyEmail").ConfigDescription?Subject=Hello%20again">@BasicConfigService.Instance.GetBasicConfiguration("CompanyEmail").ConfigDescription</a></li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->
@@ -219,7 +221,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p class="copyright text-center">Copyright 2019 <a href="~/Home">ACBonanza.com</a></p>
+                        <p class="copyright text-center">Copyright 2019 <a href="@Url.Action("Index","Home")">ACBonanza.com</a></p>
                     </div>
                 </div>
             </div>

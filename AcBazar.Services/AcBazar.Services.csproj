@@ -48,9 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicConfigService.cs" />
     <Compile Include="BrandsService.cs" />
     <Compile Include="CategoriesService.cs" />
+    <Compile Include="ProductSpecMappService.cs" />
     <Compile Include="ProductsService.cs" />
+    <Compile Include="ProductTypeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

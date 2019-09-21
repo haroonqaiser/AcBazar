@@ -59,7 +59,7 @@
         // alert("BTN SAVE CLICK");
         $.ajax({
             type: "POST",
-            url: '/Brand/Edit',
+            url: '@Url.Action("Edit", "Brand")',
             data: $("#EditBrand").serialize()
         })
             .done(function (data) {
@@ -85,7 +85,7 @@
 
         $.ajax({
             type: "POST",
-            url: '/Shared/UploadImage',
+            url: '@Url.Action("UploadImage", "Shared")',
             //dataType:'json',
             data: formData,
             contentType: false,

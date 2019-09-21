@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Category Index";
+}
+
+<div class="page-title parallax parallax1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title-heading">
+                    <h1 class="title">Product Type</h1>
+                </div><!-- /.page-title-heading -->
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","ProductType")">Product Type</a></li>
+                    </ul>
+                </div><!-- /.breadcrumbs -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.page-title -->
+
+<section class="flat-row mail-chimp">
+    <div class="container">
+        <div class="row">
+            @*<div class="col-md-8">
+                    <input type="text" name="txtSearch" value="" />
+                </div>
+                <div class="col-md-4">
+                    <button id="btnSearch" name="btnSearch" type="button">Search</button>
+                    <button id="btnNew" name="btnSearch" type="button">Add New</button>
+                </div>*@
+            <form>
+                <div class="input-group">
+                    <input type="text" id="txtSearch" name="Search" class="form-control" placeholder="Search ProductTypes">
+                    <div class="input-group-append">
+                        <button id="btnSearch" name="btnSearch" type="button">Search</button>
+                        <button id="btnNew" name="btnnew" type="button">Add New</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div id="SearchRecords">
+
+    @{
+        Html.RenderAction("MainInfo");
+        //Html.RenderAction("Create");
+    }
+</div>
+
+<div id="ActionContainer"></div>
+
+<script>
+        $("#btnSearch").click(function () {
+            var searchValue = $("#txtSearch").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("MainInfo", "ProductType")',
+                data: {
+                    dataSearch: searchValue
+                }
+            })
+                .done(function (data) {
+                    $("#SearchRecords").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+
+        });
+
+</script>
+
+<script>
+        $("#btnNew").click(function () {
+            //var tsearch = $("#txtSearch").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Create", "ProductType")',
+            })
+                .done(function (data) {
+                    $("#ActionContainer").html(data);
+                    focusaction();
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+</script>

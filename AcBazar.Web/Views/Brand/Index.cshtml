@@ -1,7 +1,8 @@
-﻿@model List<Brand>
+﻿@model AcBazar.Web.ViewModels.BrandSearchViewModel
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="page-title parallax parallax1">
     <div class="container">
         <div class="row">
@@ -11,55 +12,21 @@
                 </div><!-- /.page-title-heading -->
                 <div class="breadcrumbs">
                     <ul>
-                        <li><a href="~/Home/">Home</a></li>
-                        <li><a href="~/Home/Brand/">Brand</a></li>
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","BRAND")">Brand</a></li>
                     </ul>
                 </div><!-- /.breadcrumbs -->
             </div><!-- /.col-md-12 -->
         </div><!-- /.row -->
     </div><!-- /.container -->
 </div><!-- /.page-title -->
+<div id="SearchRecords">
 
+    @{
+        Html.RenderAction("MainInfo");
+        //Html.RenderAction("Create");
+    }
 
-<section class="blog-posts grid-posts">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="post-wrap margin-bottom-26">
-                    <div class="product-content product-fourcolumn clearfix">
-                        <ul class="product style2">
-                            @foreach (var item in Model)
-                            {
-                                <li class="product-item">
-                                    <div class="thumbnail">
-                                        <a href="#">
-                                            <img src="@item.ImageURL" alt="image">
-                                        </a>
-                                    </div>
-                                    <div class="product-info clearfix">
-                                        <br />
-                                        <span class="product-title">@item.Name</span>
-                                    </div>
-                                </li>
+</div>
 
-                            }
-
-                        </ul><!-- /.product -->
-                    </div>
-                </div><!-- /.post-wrap -->
-                <div class="blog-pagination text-center clearfix">
-                    <ul class="flat-pagination">
-                        <li class="prev">
-                            <a href="#"><i class="fa fa-angle-left"></i></a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#" title="">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                    </ul><!-- /.flat-pagination -->
-                </div><!-- /.blog-pagination -->
-            </div><!-- /.col-md-12 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section>
 

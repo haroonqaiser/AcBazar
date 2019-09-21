@@ -1,0 +1,149 @@
+﻿
+@model AcBazar.Web.ViewModels.ProductTypeSearchViewModel
+
+@{
+    /**/
+
+    ViewBag.Title = "MainInfo";
+}
+
+@*<header>
+        @Scripts.Render("~/Content/javascript/jquery.min.js")
+    </header>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table border="1" class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.productTypes)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td><img src="@item.ImageURL" /></td>
+                            <td>
+                                <button class="btnClassEdit" type="button" data-id="@item.ID">Edit</button>
+                                <button class="btnClassDelete" type="button" data-id="@item.ID">Delete</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @*</div>*@
+        </div>
+
+        @if (Model.pager != null)
+        {
+            <div class="blog-pagination text-center clearfix" id="pgclass">
+                <ul class="flat-pagination">
+                    @if (Model.pager.CurrentPage > 1)
+                    {
+                        <li class="first">
+                            <a href="#" class="pagination" data-pageno="1"><i class="fa fa-angle-double-left"></i></a>
+                        </li>
+                        <li class="prev">
+                            <a href="#" class="pagination prev" data-pageno="@(Model.pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                    }
+
+                    @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                    {
+                        string activeClass = Model.pager.CurrentPage == page ? "active" : string.Empty;
+                        <li class="@activeClass"><a href="#" title="" class="@activeClass pagination" data-pageno="@page">@page</a></li>
+                    }
+
+                    @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                    {
+                        <li><a href="#" class="pagination" data-pageno="@(Model.pager.CurrentPage+ 1)"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="#" class="pagination" data-pageno="@Model.pager.TotalPages"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul><!-- /.flat-pagination -->
+            </div><!-- /.blog-pagination -->
+        }
+    </div>
+
+
+
+    <script>
+        $(".pagination").click(function () {
+            $.ajax({
+                url: '@Url.Action("MainInfo", "ProductType")',
+                data: {
+                    pageNo: $(this).attr("data-pageno"),
+                    dataSearch: '@Model.SearchTerm'
+                }
+            })
+                .done(function (data) {
+                    $("#SearchRecords").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+    </script>
+
+
+    <script>
+        $(".btnClassEdit").click(function () {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Edit", "ProductType")',
+                data: {
+                    ID: $(this).attr("data-id")
+                }
+            })
+                .done(function (data) {
+                    $("#ActionContainer").html(data);
+                    focusaction();
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        $(".btnClassDelete").click(function () {
+            var result = confirm("Want to delete?");
+            if (result) {
+                //Logic to delete the item
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "ProductType")',
+                    data: {
+                        ID: $(this).attr("data-id")
+                    }
+                })
+                    .done(function (data) {
+                        $("#SearchRecords").html(data);
+                    })
+                    .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert('Failed');
+                    });
+            }
+        });
+    </script>
+
+</div>

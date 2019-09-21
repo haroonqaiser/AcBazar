@@ -40,27 +40,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var product in Model)
+                        @foreach (var product in Model.CardProducts)
                         {
+                            var ProductQuantity = Model.ProductIDs.Where(x => x == product.ID).Count();
+                            var Amount = ProductQuantity * product.Price;
                         <tr>
                             <td>@product.Brand.Name</td>
                             <td>@product.Category.Name</td>
                             <td>@product.Name</td>
                             <td>@product.Description</td>
                             <td>@product.Price</td>
-                            <td>@product.Price</td>
-                            <td>@product.Price</td>
+                            <td>@ProductQuantity</td>
+                            <td>@Amount</td>
                             <td><img src="@product.ImageURL" /></td>
                             <td>
                                 <button class="btnClassDelete" type="button" data-id="@product.ID">Remove</button>
                             </td>
                         </tr>
                         }
-                            <tr>
-                                <td>
-                                    <button id="btnConfirm" type="button">Confirm</button>
-                                </td>
-                            </tr>
+                        <tr>
+                            @{var TotalQuantity = Model.CardProducts.Sum(x => x.Price * Model.ProductIDs.Where(p => p == x.ID).Count());}
+                            <td colspan="6">Total</td>
+                            <td>@TotalQuantity</td>
+                            <td></td>
+                            <td>
+                                <button id="btnConfirm" type="button">Confirm</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 @*</div>*@

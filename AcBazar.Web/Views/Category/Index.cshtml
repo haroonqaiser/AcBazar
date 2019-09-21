@@ -11,8 +11,8 @@
                 </div><!-- /.page-title-heading -->
                 <div class="breadcrumbs">
                     <ul>
-                        <li><a href="~/Home/">Home</a></li>
-                        <li><a href="~/Category/">Category</a></li>
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","Category")">Category</a></li>
                     </ul>
                 </div><!-- /.breadcrumbs -->
             </div><!-- /.col-md-12 -->
@@ -49,20 +49,21 @@
         //Html.RenderAction("Create");
     }
     </div>
+
     <div id="ActionContainer"></div>
+
     <script>
         $("#btnSearch").click(function () {
             var searchValue = $("#txtSearch").val();
             $.ajax({
                 type: "GET",
-                url: '/Category/MainInfo',
+                url: '@Url.Action("MainInfo", "Category")',
                 data: {
                     dataSearch: searchValue
                 }
             })
                 .done(function (data) {
                     $("#SearchRecords").html(data);
-                    alert(data);
                 })
                 .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                     alert('Failed');
@@ -77,7 +78,7 @@
             //var tsearch = $("#txtSearch").val();
             $.ajax({
                 type: "GET",
-                url: '/Category/Create',
+                url: '@Url.Action("Create", "Category")',
             })
                 .done(function (data) {
                     $("#ActionContainer").html(data);

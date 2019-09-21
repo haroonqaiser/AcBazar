@@ -120,22 +120,34 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Enum.cs" />
     <Compile Include="Controllers\BrandController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductTypeController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BasicCofigViewModel.cs" />
+    <Compile Include="ViewModels\BrandSearchViewModel.cs" />
+    <Compile Include="ViewModels\CategorySearchViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
+    <Compile Include="ViewModels\ProductDetail.cs" />
+    <Compile Include="ViewModels\ProductSearchViewModel.cs" />
+    <Compile Include="ViewModels\ProductTypeSearchViewModel.cs" />
+    <Compile Include="ViewModels\ProductWidgetViewModel.cs" />
+    <Compile Include="ViewModels\SharedViewModels.cs" />
     <Compile Include="ViewModels\ShopViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\icon\favicon.png" />
+    <Content Include="Content\images\about\excel.png" />
     <Content Include="Content\images\avatar-1.png" />
     <Content Include="Content\images\avatar.png" />
     <Content Include="Content\images\bg-countdown-1-962x506.jpg" />
@@ -350,6 +362,9 @@
     <Content Include="Content\images\slider\slider-bg-5.jpg" />
     <Content Include="Content\images\slider\slider-bg-7.jpg" />
     <Content Include="Content\images\slider\slider-bg-8.jpg" />
+    <Content Include="Content\images\slider\sliderimage1.jpg" />
+    <Content Include="Content\images\slider\sliderimage2.jpg" />
+    <Content Include="Content\images\slider\sliderimage3.jpg" />
     <Content Include="Content\images\wordpress-version.png" />
     <Content Include="Content\javascript\bootstrap.min.js" />
     <Content Include="Content\javascript\equalize.min.js" />
@@ -426,6 +441,7 @@
     <Content Include="Content\rev-slider\fonts\revicons\revicons90c6.eot" />
     <Content Include="Content\rev-slider\fonts\revicons\revicons90c6.ttf" />
     <Content Include="Content\rev-slider\fonts\revicons\revicons90c6.woff" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -437,7 +453,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -468,10 +486,23 @@
     <Content Include="Views\Home\Term.cshtml" />
     <Content Include="Views\Category\MainInfo.cshtml" />
     <Content Include="Views\Shop\Checkout.cshtml" />
+    <Content Include="Views\Product\ExportListFromTsv.cshtml" />
+    <Content Include="Views\Brand\MainInfo.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Widget\Products.cshtml" />
+    <Content Include="Views\Shop\ShoptDetail.cshtml" />
+    <Content Include="Views\ProductType\Index.cshtml" />
+    <Content Include="Views\ProductType\MainInfo.cshtml" />
+    <Content Include="Views\ProductType\Create.cshtml" />
+    <Content Include="Views\ProductType\Edit.cshtml" />
+    <Content Include="Views\ProductType\Delete.cshtml" />
+    <Content Include="Views\Home\FAQs.cshtml">
+      <BrowseToURL>~/Home/FAQs</BrowseToURL>
+    </Content>
+    <Content Include="Views\Shop\FilterProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\images\about\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

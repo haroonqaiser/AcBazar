@@ -1,4 +1,5 @@
-﻿using AcBazar.Services;
+﻿using AcBazar.Entities;
+using AcBazar.Services;
 using AcBazar.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -10,14 +11,20 @@ namespace AcBazar.Web.Controllers
 {
     public class HomeController : Controller
     {
-        CategoriesService categoriesService = new CategoriesService();
-        ProductsService productsService = new ProductsService();
+        public void PassThings(List<Thing> things)
+        {
+            var t = things;
+        }
         public ActionResult Index()
         {
             HomeViewModels model = new HomeViewModels
             {
-                Categories = categoriesService.GetCategories(),
-                Products = productsService.GetProducts()
+                ProductType = ProductTypeService.Instance.GetProductTypes(),
+                Categories = CategoriesService.Instance.GetCategories(),
+                Products = ProductsService.Instance.GetProducts(0),
+                Brand = BrandsService.Instance.GetBrands(),
+                BasicConfiguration = BasicConfigService.Instance.GetBasicConfigurations().FirstOrDefault(),
+                BasicConfigurations = BasicConfigService.Instance.GetBasicConfigurations()
             };
             return View(model);
         }
@@ -47,6 +54,11 @@ namespace AcBazar.Web.Controllers
         }
 
         public ActionResult Term()
+        {
+            return View();
+        }
+
+        public ActionResult FAQs()
         {
             return View();
         }

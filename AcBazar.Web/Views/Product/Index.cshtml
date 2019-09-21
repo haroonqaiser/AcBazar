@@ -1,46 +1,57 @@
 ﻿@{
     ViewBag.Title = " Product Info Index";
 }
+@*<header>
+        @Scripts.Render("~/Content/javascript/jquery.min.js")
+    </header>*@
+
+<div class="page-title parallax parallax1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title-heading">
+                    <h1 class="title">Product</h1>
+                </div><!-- /.page-title-heading -->
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                        <li><a href="@Url.Action("Index","Product")">Product</a></li>
+                    </ul>
+                </div><!-- /.breadcrumbs -->
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- /.page-title -->
 
 <section class="flat-row mail-chimp">
     <div class="container">
-
-        <div class="row">
+        @*<div class="col-md-8">
+                <input type="text" name="txtSearch" value="" />
+            </div>
             <div class="col-md-4">
-                <div class="text">
-                    @*<h3>Product Search</h3>*@
+                <button id="btnSearch" name="btnSearch" type="button">Search</button>
+                <button id="btnNew" name="btnSearch" type="button">Add New</button>
+            </div>*@
+        <form>
+
+            <div class="input-group">
+                <input type="text" id="txtSearch" class="form-control form-control-sm" placeholder="Search Product">
+                <div class="input-group-append">
+                    <button id="btnSearch" name="btnSearch" type="button">Search</button>
+                    <button id="btnNew" name="btnnew" type="button">Add New</button>
+                    <a href="@Url.Action("ExportListFromTsv", "Product" )"><img src="~/Content/images/about/excel.png" alt="Export" height="30" width="30"/></a>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="subscribe clearfix">
-                    <form action="#" method="post" accept-charset="utf-8" id="subscribe-form">
-                        <div class="subscribe-content">
-                                <div class="input">
-                                    <input type="email" id="txtSearch" name="Search" placeholder="Search Product">
-                                </div>
-
-                                <div class="button">
-                                    <button type="button" id="btnSearch">SEARCH</button>
-                                </div>
-                                
-                        </div>
-                    </form>
-                    <div class="button">
-                        <label>  </label>
-                        <input type="button" id="btnNew" value="ADD NEW" />
-                    </div>
-                </div><!-- /.subscribe -->
-            </div>
-        </div>
+        </form>
     </div>
 </section>
+<div id="SearchProduct">
+    @{
 
-@{
-
-    Html.RenderAction("ProductInfo");
-    //Html.RenderAction("Create");
-}
-
+        Html.RenderAction("ProductInfo");
+        //Html.RenderAction("Create");
+    }
+</div>
 <div id="ActionContainer"></div>
 <script>
     $("#btnSearch").click(function () {
@@ -48,7 +59,7 @@
 
         $.ajax({
             type: "GET",
-            url: '/Product/ProductInfo',
+            url: '@Url.Action("ProductInfo", "Product")',
             data: {
                 dataSearch: searchValue
             }
@@ -64,27 +75,75 @@
 
 </script>
 
-<script>
-    $("#btnNew").click(function () {
-        //var tsearch = $("#txtSearch").val();
-        $.ajax({
-            type: "GET",
-            url: '/Product/Create',
-        })
-            .done(function (data) {
-                $("#ActionContainer").html(data);
-                focusaction();
+@*<script>
+        $("#btnNew").click(function () {
+            //var tsearch = $("#txtSearch").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Create", "Product")',
             })
-            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert('Failed');
-            });
+                .done(function (data) {
+                    $("#ActionContainer").html(data);
+                    //focusaction();
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
 
-    });
+        });
 
-    function focusaction() {
+        //function focusaction() {
+        //    alert("reached");
+        //    $('html, body').animate({
+        //        scrollTop: $("#ActionContainer").offset().top - 100
+        //    }, 1000);
+        //}
+    </script>*@
+
+<script>
+        $("#btnNew").click(function () {
+            //var tsearch = $("#txtSearch").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Create", "Product")'
+            })
+                .done(function (data) {
+                    $("#ActionContainer").html(data);
+                    focusaction("ActionContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+
+        });
+
+</script>
+
+@*<script>
+    $("#btnExport").click(function () {
+            //var tsearch = $("#txtSearch").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ExportListFromTsv", "Product")'
+            })
+                .done(function (data) {
+                    alert(data);
+                    //focusaction("ActionContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+
+        });
+
+</script>*@
+
+<script>
+    function focusaction(focusname) {
         $('html, body').animate({
-            scrollTop: $("#ActionContainer").offset().top - 100
+            scrollTop: $("#" + focusname).offset().top - 100
         }, 1000);
     }
 </script>
+
 

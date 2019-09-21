@@ -1,0 +1,89 @@
+﻿@model AcBazar.Web.ViewModels.ProductWidgetViewModel
+@{
+    var ImageURLGeneric = "/Content/images/shop/sh-4/1.jpg";
+    <!-- PRODUCT -->
+    if (Model != null && Model.Product != null && Model.Product.Count>0)
+    {
+    <section class="flat-row row-product-project style-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section margin-bottom-41">
+                       <h2 class="title">@Model.ProductTitle</h2>
+                    </div>
+                    @if (Model.IsBest)
+                    {
+                        <ul class="flat-filter style-1 text-center max-width-682 clearfix">
+                            <li class="active"><a href="#" data-filter="*">All Product</a></li>
+                            @foreach (var category in Model.Product.Select(x => x.Category).ToList().Distinct())
+                            {
+                                <li><a href="#" data-filter=".@category.ID">@category.Name</a></li>
+                            }
+
+                        </ul>
+                    }
+                    <div class="divider h54"></div>
+
+                    <div class="product-content product-fourcolumn clearfix">
+                        @{ string isotop = "";
+                            if (Model.IsBest)
+                            {
+                                isotop = "isotope-product clearfix";
+                            }
+                        }
+                            <ul class="product style2 @isotop">
+                                @foreach (var product in Model.Product)
+                                {
+                                    var ImageURL = string.IsNullOrEmpty(product.ImageURL) ? ImageURLGeneric : product.ImageURL;
+                                    var AmountDis = product.Price - product.AmountDis;
+
+                                    <li class="product-item @product.Category.ID">
+                                        <div class="product-thumb clearfix">
+                                            <a href="@Url.Action("ShoptDetail", "Shop", new{ ProductID = product.ID })">
+                                                <img src="@ImageURL" alt="image">
+                                            </a>
+                                            @if (product.IsSale && product.AmountDis > 0 && product.IsBest)
+                                            {
+                                                <span class="new sale">Sale</span>
+                                            }
+                                            @if (!product.IsSale && product.IsNew && product.IsBest)
+                                            {
+                                                <span class="new">New</span>
+                                            }
+                                        </div>
+                                        <div class="product-info clearfix">
+                                            <span class="product-title">@product.Name</span>
+                                            <div class="price">
+                                                @if (product.IsSale && product.AmountDis > 0 && product.IsBest)
+                                                {
+                                                    <del>
+                                                        <span class="regular">Rs.@String.Format("{0:n0}", product.Price)</span>
+                                                    </del>
+                                                    <ins>
+                                                        <span class="amount">Rs.@String.Format("{0:n0}", AmountDis)</span>
+                                                    </ins>
+                                                }
+                                                else
+                                                {
+                                                    <ins>
+                                                        <span class="amount">Rs.@String.Format("{0:n0}", product.Price)</span>
+                                                    </ins>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="add-to-cart text-center">
+                                            <a href="#">ADD TO CART</a>
+                                        </div>
+                                        <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END PRODUCT -->
+        }
+    }

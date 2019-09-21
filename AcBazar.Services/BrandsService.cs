@@ -8,8 +8,23 @@ using System.Threading.Tasks;
 
 namespace AcBazar.Services
 {
+
     public class BrandsService
     {
+        #region Singleton
+        private static BrandsService instance { get; set; }
+        public static BrandsService Instance    
+        {
+            get {
+                if (instance == null) instance = new BrandsService();
+                return instance;
+            }
+        }
+        BrandsService()
+        {
+        }
+
+        #endregion
         public Brand GetBrand(int ID)
         {
             using (var context = new ACContext())
@@ -26,6 +41,42 @@ namespace AcBazar.Services
             }
 
         }
+
+
+        public int GetBrandsCount(string search)
+        {
+            using (var context = new ACContext())
+            {
+                if (!String.IsNullOrEmpty(search))
+                    return context.Brands.Where(x => x.Name.ToLower().Contains(search.ToLower())).Count();
+                else
+                    return context.Brands.Count();
+            }
+
+        }
+
+        public List<Brand> GetBrands(string search, int pageNo)
+        {
+            int pageSize = int.Parse(BasicConfigService.Instance.GetBasicConfiguration("ListingPageSize").ConfigDescription);
+            using (var context = new ACContext())
+            {
+                if (!String.IsNullOrEmpty(search))
+                    return context.Brands.Where(x => x.Name != null && x.Name.ToLower()
+                        .Contains(search.ToLower()))
+                        .OrderBy(x => x.ID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+                else
+                    return context.Brands
+                        .OrderBy(x => x.ID)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToList();
+            }
+        }
+
+
         public void SaveBrand(Brand brand)
         {
             using (var context = new ACContext())

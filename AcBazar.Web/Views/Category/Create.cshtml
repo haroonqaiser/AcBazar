@@ -14,7 +14,11 @@
     <label>Description:</label>
     <input name="Description" />
     <br />
-
+    
+    <label>Is Featured:</label>
+    <input name="IsFeatured" type="checkbox" style="display:initial"/>
+    <br />
+    
     <label>Image:</label>
     <input name="Image" type="file" id="ImageUpload" accept=".jpg, .png" />
     <br />
@@ -41,7 +45,7 @@
 
         $.ajax({
             type: "POST",
-            url: '/Shared/UploadImage',
+            url: '@Url.Action("UploadImage", "Shared")',
             //dataType:'json',
             data: formData,
             contentType: false,
@@ -68,7 +72,7 @@
         // alert("BTN SAVE CLICK");
         $.ajax({
             type: "POST",
-            url: '/Category/Create',
+            url: '@Url.Action("Create", "Category")',
             data: $("#CreateForm").serialize()
         })
             .done(function (data) {

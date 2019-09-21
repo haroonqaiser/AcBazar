@@ -1,115 +1,180 @@
-﻿@model List<Product>
+﻿@model AcBazar.Web.ViewModels.ProductSearchViewModel
 @{
     ViewBag.Title = "ProductInfo";
 }
 
-<div id="SearchProduct">
-    <header>
-        @Scripts.Render("~/Content/javascript/jquery.min.js")
-    </header>
-    <section class="flat-row flat-contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="title-section margin_bottom_17">
-                        <h2 class="title">
-                            Product Information
-                        </h2>
-                    </div><!-- /.title-section -->
-                </div><!-- /.col-md-12 -->
-            </div><!-- /.row -->
-        </div><!-- /.row -->
-    </section>
-    <div class="container">
 
-        <div class="row">
-            @*<div class="col-md-4">*@
-            <div class="col-md-12">
-                <table border="1" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <td>Brand</td>
-                            <td>Category</td>
-                            <td>Name</td>
-                            <td>Description</td>
-                            <td>Price</td>
-                            <td>Image</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var product in Model)
-                        {
-                            <tr>
-                                <td>@product.Brand.Name</td>
-                                <td>@product.Category.Name</td>
-                                <td>@product.Name</td>
-                                <td>@product.Description</td>
-                                <td>@product.Price</td>
-                                <td><img src="@product.ImageURL" /></td>
-                                <td>
-                                    <button class="btnClassEdit" type="button" data-id="@product.ID">Edit</button>
-                                    <button class="btnClassDelete" type="button" data-id="@product.ID">Delete</button>
-                                </td>
-                            </tr>
+@*<header>
+        @Scripts.Render("~/Content/javascript/jquery.min.js")
+    </header>*@
+
+<div class="container">
+
+    <div class="row">
+        @*<div class="col-md-4">*@
+        <div class="col-md-12">
+            <table border="1" class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Brand</td>
+                        <td>Category</td>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>Price</td>
+                        <td>Image</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.product)
+                    {
+                    <tr>
+                        <td>@product.Brand.Name</td>
+                        <td>@product.Category.Name</td>
+                        <td>@product.Name</td>
+                        @{
+                            if (String.IsNullOrEmpty(product.Description))
+                            {
+                                <td></td>
+                            }
+                            else
+                            {
+                                <td>@Html.Raw(product.Description.Replace(Environment.NewLine, "<br />"))</td>
+                            }
+                            //var desc = String.IsNullOrEmpty(product.Description) ? "" : Html.Raw(product.Description.Replace(Environment.NewLine, "<br />")).ToString();
                         }
-                    </tbody>
-                </table>
-                @*</div>*@
-            </div>
+
+                        <td>@String.Format("{0:n0}", product.Price)</td>
+                        <td><img src="@product.ImageURL" /></td>
+                        <td>
+                            <button class="btnClassEdit" type="button" data-id="@product.ID">Edit</button>
+                            <button class="btnClassDelete" type="button" data-id="@product.ID">Delete</button>
+                            <button class="btnClassAddCart" type="button" data-id="@product.ID">Add to Cart</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @*</div>*@
         </div>
+
+        @if (Model.pager != null)
+        {
+            <div class="blog-pagination text-center clearfix" id="pgclass">
+                <ul class="flat-pagination">
+                    @if (Model.pager.CurrentPage > 1)
+                    {
+                        <li class="first">
+                            <a href="#" class="pagination" data-pageno="1"><i class="fa fa-angle-double-left"></i></a>
+                        </li>
+                        <li class="prev">
+                            <a href="#" class="pagination prev" data-pageno="@(Model.pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                    }
+
+                    @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                    {
+                        string activeClass = Model.pager.CurrentPage == page ? "active" : string.Empty;
+                        <li class="@activeClass"><a href="#" title="" class="@activeClass pagination" data-pageno="@page">@page</a></li>
+                    }
+
+                    @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                    {
+                        <li><a href="#" class="pagination" data-pageno="@(Model.pager.CurrentPage+ 1)"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="#" class="pagination" data-pageno="@Model.pager.TotalPages"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul><!-- /.flat-pagination -->
+            </div><!-- /.blog-pagination -->
+        }
     </div>
 
-        <script>
-            $(".btnClassEdit").click(function () {
+ 
+</div>
+
+<script>
+        $(".pagination").click(function () {
+            $.ajax({
+                url: '@Url.Action("ProductInfo", "Product")',
+                data: {
+                    pageNo: $(this).attr("data-pageno"),
+                    dataSearch: '@Model.SearchTerm'
+                }
+            })
+                .done(function (data) {
+                    $("#SearchProduct").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+</script>
+
+
+<script>
+        $(".btnClassEdit").click(function () {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("Edit", "Product")',
+                data: {
+                    ID: $(this).attr("data-id")
+                }
+            })
+                .done(function (data) {      
+                    $("#ActionContainer").html(data);
+                    focusaction("ActionContainer");
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+</script>
+
+<script>
+        $(".btnClassDelete").click(function () {
+            var result = confirm("Want to delete?");
+            if (result) {
+                //Logic to delete the item
+
                 $.ajax({
                     type: "GET",
-                    url: '/Product/Edit',
+                    url: '@Url.Action("Delete", "Product")',
                     data: {
                         ID: $(this).attr("data-id")
                     }
                 })
                     .done(function (data) {
-                        $("#ActionContainer").html(data);
-                        focusaction();
+                        $("#SearchProduct").html(data);
                     })
                     .fail(function (XMLHttpRequest, textStatus, errorThrown) {
                         alert('Failed');
                     });
-            });
-
-            function focusaction() {
-                $('html, body').animate({
-                    scrollTop: $("#ActionContainer").offset().top - 100
-                }, 1000);
             }
-        </script>
+        });
 
-        <script>
-            $(".btnClassDelete").click(function () {
-                var result = confirm("Want to delete?");
-                if (result) {
-                    //Logic to delete the item
 
-                    $.ajax({
-                        type: "GET",
-                        url: '/Product/Delete',
-                        data: {
-                            ID: $(this).attr("data-id")
-                        }
-                    })
-                        .done(function (data) {
-                            $("#SearchProduct").html(data);
-                        })
-                        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                            alert('Failed');
-                        });
-                }
-            });
 
-          
+</script>
 
-        </script>
 
-    
-    </div>
+<script>
+    var products = [];
+
+    $(".btnClassAddCart").click(function () {
+        var productID = $(this).attr("data-id");
+
+        products.push(productID);
+
+        $.cookie('CartProducts', products.join('-'), { path: '/' });
+
+        alert("Product added to Cart");
+
+    });
+</script>

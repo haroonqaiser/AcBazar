@@ -39,6 +39,9 @@
                                 <input name="Description" value="@Model.Description" />
                                 <br />
 
+                                <label>Is Featured:</label>
+                                <input name="IsFeatured" type="checkbox" style="display:initial" checked="@Model.IsFeatured" value="@Model.IsFeatured" />
+                                <br />
 
                                 <label>Image:</label>
                                 <input name="Image" type="file" id="ImageUpload" accept=".jpg, .png" />
@@ -77,7 +80,7 @@
 
         $.ajax({
             type: "POST",
-            url: '/Shared/UploadImage',
+            url: '@Url.Action("UploadImage", "Shared")',
             //dataType:'json',
             data: formData,
             contentType: false,
@@ -102,11 +105,11 @@
     $("#btnEdit").click(function () {
         $.ajax({
             type: "POST",
-            url: '/Category/Edit',
+            url: '@Url.Action("Edit", "Category")',
             data: $("#editRecord").serialize()
         })
             .done(function (data) {
-                $("#SearchProduct").html(data);
+                $("#SearchRecords").html(data);
                 $("#ActionContainer").html("");
             })
             .fail(function (XMLHttpRequest, textStatus, errorThrown) {

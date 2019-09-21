@@ -1,10 +1,15 @@
-﻿@model List<Category>
+﻿@model AcBazar.Web.ViewModels.CategorySearchViewModel
 
 @{
     /**/
 
     ViewBag.Title = "MainInfo";
 }
+
+@*<header>
+        @Scripts.Render("~/Content/javascript/jquery.min.js")
+    </header>*@
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -13,20 +18,21 @@
                     <tr>
                         <td>Name</td>
                         <td>Description</td>
+                        <td>Is-Featured</td>
                         <td>Action</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var category in Model)
+                    @foreach (var category in Model.Categories)
                     {
                         <tr>
                             <td>@category.Name</td>
                             <td>@category.Description</td>
+                            <td>@category.IsFeatured</td>
                             <td><img src="@category.ImageURL" /></td>
                             <td>
                                 <button class="btnClassEdit" type="button" data-id="@category.ID">Edit</button>
                                 <button class="btnClassDelete" type="button" data-id="@category.ID">Delete</button>
-                                <button class="btnClassAddCart" type="button" data-id="@category.ID">Add to Cart</button>
                             </td>
                         </tr>
                     }
@@ -35,13 +41,69 @@
             @*</div>*@
         </div>
 
+        @if (Model.pager != null)
+        {
+            <div class="blog-pagination text-center clearfix" id="pgclass">
+                <ul class="flat-pagination">
+                    @if (Model.pager.CurrentPage > 1)
+                    {
+                        <li class="first">
+                            <a href="#" class="pagination" data-pageno="1"><i class="fa fa-angle-double-left"></i></a>
+                        </li>
+                        <li class="prev">
+                            <a href="#" class="pagination prev" data-pageno="@(Model.pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></a>
+                        </li>
+                    }
+
+                    @for (var page = Model.pager.StartPage; page <= Model.pager.EndPage; page++)
+                    {
+                        string activeClass = Model.pager.CurrentPage == page ? "active" : string.Empty;
+                        <li class="@activeClass"><a href="#" title="" class="@activeClass pagination" data-pageno="@page">@page</a></li>
+                    }
+
+                    @if (Model.pager.CurrentPage < Model.pager.TotalPages)
+                    {
+                        <li><a href="#" class="pagination" data-pageno="@(Model.pager.CurrentPage+ 1)"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="#" class="pagination" data-pageno="@Model.pager.TotalPages"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+
+                </ul><!-- /.flat-pagination -->
+            </div><!-- /.blog-pagination -->
+        }
     </div>
+
+
+
+    <script>
+        $(".pagination").click(function () {
+            $.ajax({
+                url: '@Url.Action("MainInfo", "Category")',
+                data: {
+                    pageNo: $(this).attr("data-pageno"),
+                    dataSearch: '@Model.SearchTerm'
+                }
+            })
+                .done(function (data) {
+                    $("#SearchRecords").html(data);
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Failed');
+                });
+        });
+
+        function focusaction() {
+            $('html, body').animate({
+                scrollTop: $("#ActionContainer").offset().top - 100
+            }, 1000);
+        }
+    </script>
+
 
     <script>
         $(".btnClassEdit").click(function () {
             $.ajax({
                 type: "GET",
-                url: '/Category/Edit',
+                url: '@Url.Action("Edit", "Category")',
                 data: {
                     ID: $(this).attr("data-id")
                 }
@@ -70,7 +132,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: '/Category/Delete',
+                    url: '@Url.Action("Delete", "Category")',
                     data: {
                         ID: $(this).attr("data-id")
                     }
@@ -85,19 +147,4 @@
         });
     </script>
 
-    <script>
-        var products = [];
-
-        $(".btnClassAddCart").click(function () {
-            var productID = $(this).attr("data-id");
-
-            products.push(productID);
-
-            $.cookie('CartProducts', products.join('-'), {path: '/'});
-
-            alert("Product added to Cart");
-                
-        });
-    </script>
-    
 </div>
